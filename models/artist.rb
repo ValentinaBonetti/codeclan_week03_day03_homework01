@@ -17,7 +17,14 @@ class Artist
            RETURNING *"
     values = [@name,@birth_year]
     result = SqlRunner.run(sql,values)
-    @id = result[0]["id"].to_i 
+    @id = result[0]["id"].to_i
+  end
+
+  def list_albums()
+    sql = "SELECT * FROM albums WHERE artist_id = $1"
+    values = [@id]
+    albums_pgresult = SqlRunner.run(sql,values)
+    return albums_pgresult.map {|album_hash| Album.new(album_hash)}
   end
 
 
