@@ -45,4 +45,5 @@ class Album
     album_pgresult = SqlRunner.run(sql,values)
     return Album.new(album_pgresult[0])
   end
+
 end
