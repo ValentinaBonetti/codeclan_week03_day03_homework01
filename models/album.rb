@@ -15,17 +15,24 @@ class Album
 
   def save()
     sql = "INSERT INTO albums (
-      album_name,
-      year,
-      duration,
-      artist_id
+    album_name,
+    year,
+    duration,
+    artist_id
     ) VALUES
-      ($1,$2,$3,$4)
-      RETURNING *"
-      values = [@album_name,@year,@duration,@artist_id]
-      result = SqlRunner.run(sql,values)
-      @id = result[0]["id"].to_i
-    end
+    ($1,$2,$3,$4)
+    RETURNING *"
+    values = [@album_name,@year,@duration,@artist_id]
+    result = SqlRunner.run(sql,values)
+    @id = result[0]["id"].to_i
+  end
+
+  
+  def delete()
+    sql = "DELETE FROM albums WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql,values)
+  end
 
   def show_artist()
     sql = "SELECT * FROM artists WHERE id = $1"
