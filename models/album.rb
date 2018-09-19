@@ -34,4 +34,9 @@ class Album
     return Artist.new(artist_pgresult[0])
   end
 
+  def self.delete_all()
+    sql = "DELETE FROM albums"
+    SqlRunner.run(sql)
+  end
+
 end

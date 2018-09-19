@@ -27,6 +27,10 @@ class Artist
     return albums_pgresult.map {|album_hash| Album.new(album_hash)}
   end
 
+  def self.delete_all()
+    sql = "DELETE FROM artists"
+    SqlRunner.run(sql)
+  end
 
 
 end
